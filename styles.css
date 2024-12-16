@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: none;
+  /*  background-color: #f4f4f4;  Color de fondo claro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,12 +11,13 @@ body {
 }
 
 .container {
-    background: none;
+    background: white; /* Fondo blanco para el contenedor */
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     width: 90%; /* Ancho adaptable para dispositivos móviles */
     max-width: 400px; /* Ancho máximo para pantallas grandes */
+   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  Sombra suave */
     transition: background-color 0.3s; /* Transición suave */
 }
 
@@ -32,7 +33,7 @@ input[type="text"] {
     padding: 10px;
     margin-bottom: 20px;
     border: none; /* Sin bordes */
-    border-bottom: 2px solid #ccc; /* Borde inferior */
+    border-bottom: 3px solid #ccc; /* Borde inferior */
     transition: border-color 0.3s; /* Transición suave */
 }
 
@@ -136,15 +137,13 @@ body.dark-mode {
 }
 
 .container.dark-mode {
-     background: none;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+    background: #1e1e1e; /* Fondo oscuro para el contenedor */
 }
 
 input[type="text"].dark-mode {
     border-bottom: 2px solid #ccc; /* Borde inferior claro */
     background-color: #333; /* Fondo del input oscuro */
     color: #ffffff; /* Color de texto claro en el input */
-
 }
 
 input[type="text"].dark-mode:focus {
@@ -152,7 +151,7 @@ input[type="text"].dark-mode:focus {
 }
 
 button.dark-mode {
-    background-color: #0056b3; /* Color de fond o del botón en modo oscuro */
+    background-color: #0056b3; /* Color de fondo del botón en modo oscuro */
 }
 
 button.dark-mode:hover {
@@ -305,17 +304,65 @@ input:checked + .slider:before {
 }
 
 .card-container {
-    display: flex;
+ display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .card {
     background-color: white; /* Color de fondo en modo claro */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    transition: background-color 0.3s;
+    border: 1px solid #e0e0e0; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transición suave */
+    display: flex;
+    flex-direction: column; /* Colocar elementos en columna */
+   /* align-items: center;  Centrar elementos horizontalmente */
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el mouse */
+}
+
+.card strong {
+    margin-bottom: 10px; /* Espacio debajo de los textos fuertes */
+}
+
+/* Estilos para los botones dentro de la tarjeta */
+.copy-btn,
+.delete-btn {
+    display: inline-block; /* Permite que los botones se alineen en línea */
+    margin: 5px; /* Espaciado entre los botones */
+    padding: 10px 15px; /* Espaciado interno para los botones */
+    background-color: #007BFF; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    text-align: center; /* Centra el texto dentro del botón */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.copy-btn:hover,
+.delete-btn:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+    background-color: #121212; /* Color de fondo oscuro */
+    color: #ffffff; /* Color de texto claro */
+}
+
+.container.dark-mode {
+    background: #1e1e1e; /* Fondo oscuro para el contenedor */
+}
+
+.card.dark-mode {
+    background-color: #333; /* Color de fondo en modo oscuro */
+    color: white; /* Color de texto en modo oscuro */
+    border: 1px solid #555; /* Borde en modo oscuro */
 }
 
 .dark-mode .card {
@@ -350,7 +397,7 @@ input:checked + .slider:before {
 
 .notification {
     position: fixed;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     padding: 15px;
     border-radius: 5px;

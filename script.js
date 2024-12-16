@@ -11,6 +11,7 @@ const closeModal = document.getElementById('closeModal');
 const savePasswordModal = document.getElementById('savePasswordModal');
 const closeSaveModal = document.getElementById('closeSaveModal');
 const usernameInput = document.getElementById('usernameInput');
+const platformInput = document.getElementById('platformInput'); // Nuevo campo para Plataforma
 const passwordInputModal = document.getElementById('passwordInputModal');
 const savePasswordBtn = document.getElementById('savePasswordBtn');
 const cancelSaveBtn = document.getElementById('cancelSaveBtn');
@@ -70,14 +71,16 @@ closeSaveModal.addEventListener('click', () => {
 // Guardar contraseña
 savePasswordBtn.addEventListener('click', () => {
     const username = usernameInput.value;
+    const platform = platformInput.value; // Obtener el valor de la plataforma
     const password = passwordInputModal.value;
-    if (username && password) {
-        savePassword(username, password);
-        usernameInput.value = ''; // Limpiar el input
+    if (username && platform && password) {
+        savePassword(username, password, platform); // Pasar la plataforma a la función de guardar
+        platformInput.value = ''; // Limpiar el input de plataforma
+        usernameInput.value = ''; // Limpiar el input       
         passwordInputModal.value = ''; // Limpiar el input
         savePasswordModal.style.display = 'none'; // Ocultar el modal
     } else {
-        showNotification('Por favor, completa ambos campos.', 'error');
+        showNotification('Por favor, completa todos los campos.', 'error');
     }
 });
 
@@ -108,10 +111,10 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-// Func ión para guardar la contraseña
-function savePassword(username, password) {
+// Función para guardar la contraseña
+function savePassword(username, password, platform) {
     const savedPasswords = JSON.parse(localStorage.getItem('savedPasswords')) || [];
-    savedPasswords.push({ username, password });
+    savedPasswords.push({ username, password, platform }); // Guardar también la plataforma
     localStorage.setItem('savedPasswords', JSON.stringify(savedPasswords));
     displaySavedPasswords();
     showNotification('Contraseña guardada exitosamente!', 'success');
@@ -125,8 +128,11 @@ function displaySavedPasswords() {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-            <strong>Usuario:</strong> ${item.username}<br>
-            <strong>Contraseña:</strong> ${item.password}
+         <strong>Plataforma:</strong> ${item.platform}<br>
+         <br>
+         <strong>Usuario:</strong> ${item.username}<br>
+         <strong>Contraseña:</strong> ${item.password}
+
             <button class="copy-btn" data-username="${item.username}" data-password="${item.password}">Copiar</button>
             <button class="delete-btn" data-index="${index}">Eliminar</button>
         `;
@@ -168,16 +174,17 @@ generateBtn.addEventListener('click', () => {
     const includeUppercase = document.getElementById('includeUppercase').checked;
     const includeSymbols = document.getElementById('includeSymbols').checked;
 
-    const password = generatePassword(includeNumbers, includeLowercase, includeUppercase, includeSymbols);
+    // Obtener la longitud de la contraseña según el checkbox
+    const passwordLength = document.getElementById('passwordLengthCheckbox').checked ? 16 : 8;
+
+    const password = generatePassword(includeNumbers, includeLowercase, includeUppercase, includeSymbols, passwordLength);
     passwordInput.value = password;
 
     const strength = evaluatePasswordStrength(includeNumbers, includeLowercase, includeUppercase, includeSymbols);
     updatePasswordStrengthIndicator(strength);
 });
 
-function generatePassword(includeNumbers, includeLowercase, includeUppercase, includeSymbols) {
-    const length = 12; // Longitud de la contraseña
-
+function generatePassword(includeNumbers, includeLowercase, includeUppercase, includeSymbols, length) {
     const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
     const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numberChars = '0123456789';
@@ -207,7 +214,7 @@ function evaluatePasswordStrength(includeNumbers, includeLowercase, includeUpper
     const criteriaMet = [includeNumbers, includeLowercase, includeUppercase, includeSymbols].filter(Boolean).length;
 
     if (criteriaMet === 1) {
-        return 'weak';
+        return ' weak';
     } else if (criteriaMet === 2) {
         return 'medium';
     } else if (criteriaMet === 3 || criteriaMet === 4) {

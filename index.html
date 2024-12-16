@@ -16,6 +16,9 @@
             <label><input type="checkbox" id="includeLowercase" checked> Incluir Minúsculas</label>
             <label><input type="checkbox" id="includeUppercase" checked> Incluir Mayúsculas</label>
             <label><input type="checkbox" id="includeSymbols" checked> Incluir Símbolos</label>
+            <label>
+                <input type="checkbox" id="passwordLengthCheckbox"> Contraseña de 16 caracteres
+            </label>
         </div>
         <button id="generateBtn">Generar Contraseña</button>
         <button id="copyBtn">Copiar al Portapapeles</button>
@@ -49,18 +52,18 @@
             <div id="savedPasswordsList" class="card-container"></div>
         </div>
     </div>
-
-    <!-- Modal para guardar contraseña -->
-    <div class="modal" id="savePasswordModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeSaveModal">&times;</span>
-            <h2>Guardar Contraseña</h2>
-            <input type="text" id="usernameInput" placeholder="Usuario">
-            <input type="text" id="passwordInputModal" placeholder="Contraseña" readonly>
-            <button id="cancelSaveBtn">Cancelar</button>
-            <button id="savePasswordBtn">Guardar</button>
-        </div>
+<!-- Modal para guardar contraseña -->
+<div class="modal" id="savePasswordModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeSaveModal">&times;</span>
+        <h2>Guardar Contraseña</h2>
+        <input type="text" id="platformInput" placeholder="Plataforma"> <!-- Nuevo campo para Plataforma -->
+        <input type="text" id="usernameInput" placeholder="Usuario">
+        <input type="text" id="passwordInputModal" placeholder="Contraseña" readonly>
+        <button id="cancelSaveBtn">Cancelar</button>
+        <button id="savePasswordBtn">Guardar</button>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
