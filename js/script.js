@@ -116,7 +116,7 @@ copyBtn.addEventListener("click", () => {
     }
 
     textarea.value = password; // Asigna la contraseña al textarea
-    document.body.appendChild(textarea); // Agrega el textarea al DOM
+    document .body.appendChild(textarea); // Agrega el textarea al DOM
     textarea.select(); // Selecciona el contenido del textarea
     document.execCommand("copy"); // Copia el contenido al portapapeles
     textarea.remove(); // Elimina el textarea del DOM
@@ -126,6 +126,7 @@ copyBtn.addEventListener("click", () => {
     copyInfo.style.opacity = "0";
     copiedInfo.style.transform = "translateY(0%)";
     copiedInfo.style.opacity = "0.75";
+    showNotification("Contraseña copiada al portapapeles.", "success"); // Notificación de éxito
 });
 
 // When Generate is clicked, Password is generated
@@ -218,9 +219,9 @@ savePassword.addEventListener("click", function() {
         };
         localStorage.setItem(platform, JSON.stringify(credentials)); // Save to localStorage
         modal.style.display = "none"; // Close modal
-        alert("Información guardada exitosamente."); // Success message
+        showNotification("Información guardada exitosamente.", "success"); // Success message
     } else {
-        alert("Por favor, completa todos los campos."); // Error message
+        showNotification("Por favor, completa todos los campos.", "error"); // Error message
     }
 });
 
@@ -236,7 +237,7 @@ const menuIcon = document.getElementById("menuIcon");
 const sideMenu = document.getElementById("sideMenu");
 const closeMenu = document.getElementById("closeMenu");
 
-// Abre el menú lateral al hacer clic en el icono del menú
+// Abre el menú lateral al hacer clic en el icono del menú ```javascript
 menuIcon.addEventListener("click", () => {
     sideMenu.classList.add("active");
 });
@@ -252,7 +253,6 @@ window.addEventListener("click", (event) => {
         sideMenu.classList.remove("active");
     }
 });
-
 
 // Función para mostrar notificaciones
 function showNotification(message, type) {
@@ -297,8 +297,6 @@ savePassword.addEventListener("click", function() {
     }
 });
 
-
-
 // Selección de elementos del DOM
 const savedPasswordsModal = document.getElementById("savedPasswordsModal");
 const closeSavedPasswordsModal = document.getElementById("closeSavedPasswordsModal");
@@ -315,6 +313,7 @@ function openSavedPasswordsModal() {
 closeSavedPasswordsModal.addEventListener("click", () => {
     savedPasswordsModal.style.display = "none"; // Cerrar el modal
 });
+
 function loadSavedPasswords() {
     const keys = Object.keys(localStorage);
     savedPasswordsContainer.innerHTML = ""; // Limpiar el contenedor antes de cargar
@@ -346,7 +345,8 @@ function loadSavedPasswords() {
                         card.classList.add("clicked");
                         setTimeout(() => {
                             card.classList.remove("clicked");
-                        }, 300); // Eliminar la clase después de 300ms
+                        }, 300); // Eliminar la clase
+                        // después de 300ms
                     });
 
                     savedPasswordsContainer.appendChild(card);
@@ -384,7 +384,6 @@ window.addEventListener("click", (event) => {
         savedPasswordsModal.style.display = "none"; // Cerrar el modal
     }
 });
-
 
 // Función para copiar texto al portapapeles
 function copyToClipboard(text) {

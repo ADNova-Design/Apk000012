@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Generador de Contraseñas</title>
+    <title>Password Generator</title>
     <link rel="stylesheet" href="css/style.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.5/css/all.min.css">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-     <!-- Menú lateral -->
+     <!-- Menu lateral -->
      <div class="side-menu" id="sideMenu">
         <div class="menu-header">
             <h2 class="h2opciones">OPCIONES</h2>
@@ -24,15 +24,17 @@
                 <span class="savedPasswordsBtn" id="savedPasswordsBtn">Contraseñas Guardadas</span>
             </button>
         </div>
-    </div>
+</div>
          
+    
+
     <div class="container">
         <div class="menu-icon" id="menuIcon">&#9776;</div>
         <h2 class="title">PasswordGen</h2>
         <div class="result">
             <div class="result__title field-title">Contraseña Generada</div>
-            <div class="result__info right">clic para copiar</div>
-            <div class="result__info left">copiado</div>
+            <div class="result__info right">Click para copiar</div>
+            <div class="result__info left">Copiado</div>
             <div class="result__viewbox" id="result">Contraseña Generada</div>
             <button id="copy-btn" style="--x: 0; --y: 0"><i class="far fa-copy"></i></button>
         </div>
@@ -66,36 +68,37 @@
 
     </div>
 
-    <!-- Ventana Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Guardar Contraseña</h2>
-            <label for="platform">Plataforma:</label>
-            <input type="text" id="platform" placeholder="Nombre de la plataforma" required>
-            
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" placeholder="Nombre de usuario" required>
-            
-            <label for="password">Contraseña:</label>
-            <input type="text" id="password" placeholder="Contraseña generada" readonly>
-            
-            <button id="savePassword">Guardar</button>
-            <button id="cancelModal">Cancelar</button>
-        </div>
+<!-- Ventana Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Guardar Contraseña</h2>
+        <label for="platform">Plataforma:</label>
+        <input type="text" id="platform" placeholder="Nombre de la plataforma" required>
+        
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" placeholder="Nombre de usuario" required>
+        
+        <label for="password">Contraseña:</label>
+        <input type="text" id="password" placeholder="Contraseña generada" readonly>
+        
+        <button id="savePassword">Guardar</button>
+        <button id="cancelModal">Cancelar</button>
     </div>
+</div>
 
-    <!-- Ventana Modal para Contraseñas Guardadas -->
-    <div class="modal" id="savedPasswordsModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeSavedPasswordsModal">&times;</span>
-            <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Contraseñas Guardadas</h2>
-            <div id="savedPasswordsContainer "></div>
-        </div>
+<!-- Ventana Modal para Contraseñas Guardadas -->
+<div class="modal" id="savedPasswordsModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeSavedPasswordsModal">&times;</span>
+        <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Contraseñas Guardadas</h2>
+        <div id="savedPasswordsContainer"></div>
     </div>
+</div>
 
-    <div id="notification" class="notification"></div>
+<div id="notification" class="notification"></div>
     
+
     <script src="js/script.js"></script>
 
 </body>
