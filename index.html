@@ -1,70 +1,103 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Generador de Contraseñas</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.5/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
+
 <body>
-    <div class="container">        
-        <div class="menu-icon" id="menuIcon">&#9776;</div>
-        <h1>Generador de Contraseñas</h1>
-        <input type="text" id="password" readonly>
-        <div class="options">
-            <label><input type="checkbox" id="includeNumbers" checked> Incluir Números</label>
-            <label><input type="checkbox" id="includeLowercase" checked> Incluir Minúsculas</label>
-            <label><input type="checkbox" id="includeUppercase" checked> Incluir Mayúsculas</label>
-            <label><input type="checkbox" id="includeSymbols" checked> Incluir Símbolos</label>
-            <label>
-                <input type="checkbox" id="passwordLengthCheckbox"> Contraseña de 16 caracteres
-            </label>
-        </div>
-        <button id="generateBtn">Generar Contraseña</button>
-        <button id="copyBtn">Copiar al Portapapeles</button>
-    </div>
-
-    <!-- Menu lateral -->
-    <div class="side-menu" id="sideMenu">
+     <!-- Menú lateral -->
+     <div class="side-menu" id="sideMenu">
         <div class="menu-header">
-            <h2>Opciones</h2>
+            <h2 class="h2opciones">OPCIONES</h2>
             <span id="closeMenu" class="close-menu">&times;</span> <!-- Botón de cerrar -->
+        </div>    
+        <div class="menu-item">
+            <button onclick="openSavedPasswordsModal()">
+                <span class="savedPasswordsBtn" id="savedPasswordsBtn">Contraseñas Guardadas</span>
+            </button>
         </div>
-    <div class="menu-item">
-        <button id="themeToggleMenu" class="toggle-button">
-            Modo Oscuro
-            <label class="switch">
-                <input type="checkbox" id="themeToggleSwitch">
-                <span class="slider"></span>
-            </label>
-        </button>
     </div>
-    <div class="menu-item">
-        <button class="savedPasswordsBtn" id="savedPasswordsBtn">Contraseñas Guardadas</button>
-    </div>
-</div>
+         
+    <div class="container">
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+        <h2 class="title">PasswordGen</h2>
+        <div class="result">
+            <div class="result__title field-title">Contraseña Generada</div>
+            <div class="result__info right">clic para copiar</div>
+            <div class="result__info left">copiado</div>
+            <div class="result__viewbox" id="result">Contraseña Generada</div>
+            <button id="copy-btn" style="--x: 0; --y: 0"><i class="far fa-copy"></i></button>
+        </div>
+        <div class="length range__slider" data-min="4" data-max="32">
+            <div class="length__title field-title" data-length='0'>Longitud:</div>
+            <input id="slider" type="range" min="4" max="32" value="16" />
+        </div>
 
-    <!-- Modal para contraseñas guardadas -->
-    <div id="savedPasswordsModal" class="modal">
+        <div class="settings">
+            <span class="settings__title field-title">Ajustes</span>
+            <div class="setting">
+                <input type="checkbox" id="uppercase" checked />
+                <label for="uppercase">Incluir Mayúsculas</label>
+            </div>
+            <div class="setting">
+                <input type="checkbox" id="lowercase" checked />
+                <label for="lowercase">Incluir Minúsculas</label>
+            </div>
+            <div class="setting">
+                <input type="checkbox" id="number" checked />
+                <label for="number">Incluir Números</label>
+            </div>
+            <div class="setting">
+                <input type="checkbox" id="symbol" />
+                <label for="symbol">Incluir Símbolos</label>
+            </div>
+        </div>
+
+        <button class="btn generate" id="generate">Generar Contraseña</button>
+        <button class="btn guardar" id="guardarbtn">Guardar Contraseña</button>
+
+    </div>
+
+    <!-- Ventana Modal -->
+    <div class="modal" id="modal">
         <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span> <!-- Botón de cerrar -->
-            <h2>Contraseñas Guardadas</h2>
-            <div id="savedPasswordsList" class="card-container"></div>
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Guardar Contraseña</h2>
+            <label for="platform">Plataforma:</label>
+            <input type="text" id="platform" placeholder="Nombre de la plataforma" required>
+            
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            
+            <label for="password">Contraseña:</label>
+            <input type="text" id="password" placeholder="Contraseña generada" readonly>
+            
+            <button id="savePassword">Guardar</button>
+            <button id="cancelModal">Cancelar</button>
         </div>
     </div>
-<!-- Modal para guardar contraseña -->
-<div class="modal" id="savePasswordModal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeSaveModal">&times;</span>
-        <h2>Guardar Contraseña</h2>
-        <input type="text" id="platformInput" placeholder="Plataforma"> <!-- Nuevo campo para Plataforma -->
-        <input type="text" id="usernameInput" placeholder="Usuario">
-        <input type="text" id="passwordInputModal" placeholder="Contraseña" readonly>
-        <button id="cancelSaveBtn">Cancelar</button>
-        <button id="savePasswordBtn">Guardar</button>
-    </div>
-</div>
 
-    <script src="script.js"></script>
+    <!-- Ventana Modal para Contraseñas Guardadas -->
+    <div class="modal" id="savedPasswordsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSavedPasswordsModal">&times;</span>
+            <h2 style="color: white; margin-top: -10px; margin-bottom: 20px;">Contraseñas Guardadas</h2>
+            <div id="savedPasswordsContainer "></div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+    
+    <script src="js/script.js"></script>
+
 </body>
+
 </html>
